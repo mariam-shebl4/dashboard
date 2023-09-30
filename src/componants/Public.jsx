@@ -42,25 +42,23 @@ const handleChange = (value) => {
     console.log(`Selected: ${value}`);
 };
 //-----------------------End---------------------------------
-//----------------------------------------------------------
+//-----------------validation inside the Modal-----------------------------------------
 const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     date: Yup.date()
+        .nullable() // Allow empty date
         .required('Date is required')
-        .nullable()
         .test('isValidDate', 'Invalid date format', (value) => {
-            if (!value) return true; // Allow empty date
+            if (!value) return false; // Show error if date is empty
             return moment(value, 'YYYY-MM-DD', true).isValid();
         }),
-        created: Yup.string().required("you have to fill field")
-   
-        
+    created: Yup.string().required("you have to fill field")
+
+
 });
 
 
 
-//-----------------------edit------------------------------------
-// the table data
 const originData = [
     {
         key: '1',
@@ -87,7 +85,8 @@ const originData = [
         created: 'Sydney No. 1 Lake Park',
     },
 ];
-
+//-----------------------edit------------------------------------
+// the table data
 
 const EditableCell = ({
     editing,
@@ -147,49 +146,17 @@ const Public = () => {
     const [form] = Form.useForm();
     const [data, setData] = useState(originData);
     const [editingKey, setEditingKey] = useState('');
-    const [formData, setFormData] = useState({
-        name: "",
-        date: "",
-        created: "",
-    });
-
+    //    inputs state which edit inside the modal
     const [name, setName] = useState('');
     const [date, setDate] = useState(null);
     const [created, setCreated] = useState('');
-    // const [tableData, setTableData] = useState([]);
+
     const [validationErrors, setValidationErrors] = useState({});
     // Function to show the modal
     const showModal = () => {
         setIsModalVisible(true);
     };
 
-    // Function to handle form submission and add a new row to the table
-    const handleFormSubmit = () => {
-        // Parse the date string and create a Date object
-        const date = new Date(formData.date);
-
-        const newData = {
-            key: count,
-            ...formData,
-            date, // Use the Date object
-        };
-        setData([...data, newData]);
-        setCount(count + 1);
-        setIsModalVisible(false); // Hide the modal after adding the row
-    };
-    // Function to handle form input changes
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    // Function to handle modal cancellation
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
 
     const isEditing = (record) => record.key === editingKey;
     const edit = (record) => {
@@ -240,13 +207,6 @@ const Public = () => {
             dataIndex: 'date',
             editable: true,
             key: 'date'
-            // render: (text) => {
-            //     const date = new Date(text);
-            //     const year = date.getFullYear();
-            //     const month = String(date.getMonth() + 1).padStart(2, '0');
-            //     const day = String(date.getDate()).padStart(2, '0');
-            //     return `${year}-${month}-${day}`;
-            // },
         },
         {
             title: 'Created by',
@@ -306,33 +266,7 @@ const Public = () => {
     });
 
     //---------------------------add new row-----------------------------
-    // const handleAdd = () => {
-    //     const newData = {
-    //         key: count,
-    //         name: `edit the name ${count}`,
-    //         date: `${count}`,
-    //         created: `. ${count}`,
-    //     };
-    //     setData([...data, newData]);
-    //     setCount(count + 1);
-    // };
-    // Function to handle the "Add" button click
-    //   const handleAdd = () => {
-    //     if (name && date && created) {
 
-    //       const newItem = {
-    //         key: tableData.length + 1,
-    //         name,
-    //         date: moment(date).format('MM/DD/YYYY'),
-    //         created,
-    //       };
-
-    //       setData([...tableData, newItem]);
-
-    //       setIsModalVisible(false);
-    //     }
-    //   };
-    // Function to handle the "Add" button click
     const handleAdd = async () => {
         try {
             await validationSchema.validate({ name, date, created }, { abortEarly: false });
@@ -404,13 +338,11 @@ const Public = () => {
                         </Button>
                         <Button type="default" size={'large'}>
                             Delete
-
                         </Button>
 
                     </Space>
                     <Button type="default" size={'large'} style={{ width: "30%" }}>
                         Import Public Holidays
-
                     </Button>
 
                 </div>
@@ -418,40 +350,40 @@ const Public = () => {
                     title="Add New Holiday"
                     visible={isModalVisible}
                     onOk={handleAdd}
-                    onCancel={() => setIsModalVisible(false)}
-                >
+                    onCancel={() => setIsModalVisible(false)}>
                     <Form>
                         <Form.Item label="Holiday Title">
                             <Input
-                                
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
+                            <span style={{ color: 'red' }}>{validationErrors.name}</span>
                         </Form.Item>
                         <Form.Item label="Start Date">
-                        <DatePicker
-          placeholder="Date"
-          value={date ? moment(date) : null}
-          onChange={(date, dateString) => setDate(dateString)}
-        />
+                            <DatePicker
+                                placeholder="Date"
+                                value={date ? moment(date) : null}
+                                onChange={(date, dateString) => setDate(dateString)}
+                            /><br />
+                            {validationErrors.date && (
+                                <>
+                                    <br />
+                                    <span style={{ color: 'red' }}>{validationErrors.date}</span>
+                                </>
+                            )}
                         </Form.Item>
                         <Form.Item label="Created by">
                             <Input
-                               
                                 value={created}
                                 onChange={(e) => setCreated(e.target.value)}
                             />
+                            <span style={{ color: 'red' }}>{validationErrors.created}</span>
                         </Form.Item>
                     </Form>
                 </Modal>
-                {/* <Table columns={columns} dataSource={data}/> */}
                 <div>
-
-
                     <Divider />
                     <Form form={form} component={false}>
-
-
                         <Table
                             rowSelection={{
                                 type: 'checkbox',

@@ -15,7 +15,7 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { CgOrganisation } from 'react-icons/cg';
 import { IoIosPaper } from 'react-icons/io';
 import { CiMenuKebab } from 'react-icons/ci';
-import icon from "../../image/Ellipse20.png"
+
 const {  Sider } = Layout;
 
 const Navbar = () => {
@@ -27,7 +27,7 @@ const Navbar = () => {
 
   const icon = "../../image/Ellipse20.png"
   return (
-    <Layout>
+    <>
       <div style={{ display: 'flex' }} >
 
         <Sider theme="light" trigger={null} collapsible collapsed={collapsed} >
@@ -57,7 +57,7 @@ const Navbar = () => {
           }}>
             {/* the top section in the sidenav */}
             <div style={{ margin: '3rem 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Avatar src={icon} size="large" />
+              <Avatar src="../../image/Ellipse20.png" size="large" />
               <p style={{ margin: '1rem 0' }}>
                 <CiMenuKebab />
               </p>
@@ -68,7 +68,7 @@ const Navbar = () => {
               <Menu
                 theme="light"
                 mode="inline"
-                defaultSelectedKeys={['1']}
+                defaultSelectedKeys={['8']}
                 items={[
                   {
                     key: '1',
@@ -119,10 +119,8 @@ const Navbar = () => {
           </div>
         </Sider>
       </div>
-      <Layout >
-        <Sidenav />
-      </Layout>
-    </Layout>
+     
+    </>
   );
 };
 export default Navbar;

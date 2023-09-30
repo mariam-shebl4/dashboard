@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import { Input, Layout, Menu, Typography, theme } from 'antd';
 import Organization from './Organization';
@@ -10,17 +11,9 @@ import { AiFillLock } from 'react-icons/ai';
 
 const { Content, Sider } = Layout;
 const Sidenav = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-
-
+  
   return (
-    <Layout style={{
-      margin: '2rem 2rem',
-      padding: '0 24',
-      background: colorBgContainer,
-    }}>
+    <>
       {/* the hole sidebar */}
       <Sider
         theme="light"
@@ -77,26 +70,8 @@ const Sidenav = () => {
           />
         </div>
       </Sider>
-      <Layout style={{
-        padding: '0 24px 24px',
-      }}>
-
-        {/* the body of the page */}
-        <Content>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-            }}
-          >
-            <Organization />
-            <Public />
-          </div>
-        </Content>
-
-      </Layout>
-    </Layout>
+    
+    </>
   );
 };
 export default Sidenav;
