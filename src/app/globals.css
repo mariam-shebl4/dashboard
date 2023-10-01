@@ -16,6 +16,4 @@
   background-color: #000; /* Background color for hovered items */
   color: #fff; /* Text color for hovered items */
 }
-:where(.css-dev-only-do-not-override-pr0fja).ant-menu-light .ant-menu-item-selected, :where(.css-dev-only-do-not-override-pr0fja).ant-menu-light>.ant-menu .ant-menu-item-selected{
-  color: #000;
-}
+
