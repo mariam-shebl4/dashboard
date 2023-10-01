@@ -69,7 +69,7 @@ const Organization = () => {
                 Organization Settings
             </Typography.Title>
             {/* the black header */}
-            <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+            <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row',background:'#222' }}>
                 <Typography.Title level={4} style={{ color: '#fff', margin: 0 }}>
                     Organization
                 </Typography.Title>

@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { SearchOutlined } from "@ant-design/icons"
 import moment from 'moment';
 import * as Yup from 'yup';
+
 const { Header, Content } = Layout;
 
 //--------------------the years option in the header-----------------------------------
@@ -37,7 +38,7 @@ const options = [
         value: '2017',
     },
 ];
-
+//for the select in the header
 const handleChange = (value) => {
     console.log(`Selected: ${value}`);
 };
@@ -58,6 +59,7 @@ const validationSchema = Yup.object().shape({
 });
 
 
+// the table data
 
 const originData = [
     {
@@ -86,7 +88,6 @@ const originData = [
     },
 ];
 //-----------------------edit------------------------------------
-// the table data
 
 const EditableCell = ({
     editing,
@@ -102,7 +103,7 @@ const EditableCell = ({
 }) => {
 
     //edit function
-    const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+    const inputNode = inputType === 'number' ? <Input /> : <Input />;
     return (
         <td {...restProps}>
             {editing ? (
@@ -138,8 +139,7 @@ const rowSelection = {
 const Public = () => {
     // ?for pagination
     const [bottom] = useState('none');
-    //---------------------------------
-    const [count, setCount] = useState(2);
+    
     // -------------State variables for managing the modal
     const [isModalVisible, setIsModalVisible] = useState(false);
     //---------------------------
@@ -296,7 +296,7 @@ const Public = () => {
     };
     return (
         <div>
-            <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+            <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' ,background:'#222'}}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <Typography.Title level={4} style={{ color: '#fff', margin: 0 }}>
                         Public Holidays Schedule
@@ -346,6 +346,7 @@ const Public = () => {
                     </Button>
 
                 </div>
+                {/* to add rows */}
                 <Modal
                     title="Add New Holiday"
                     visible={isModalVisible}

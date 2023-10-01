@@ -40,6 +40,7 @@ const Sidenav = () => {
             theme="light"
             mode="inline"
             defaultSelectedKeys={['1']}
+           
             items={[
               {
                 key: '1',

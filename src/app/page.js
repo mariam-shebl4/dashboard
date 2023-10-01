@@ -2,16 +2,18 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import Navbar from '@/componants/Navbar'
-import { Layout, theme } from 'antd'
+import { ConfigProvider, Layout } from 'antd'
 import Organization from '@/componants/Organization'
 import Public from '@/componants/Public'
 import Sidenav from '@/componants/Sidenav'
+import theme from '../../theme/themeConfig'
+
 const { Content } = Layout;
 export default function Home() {
 
 
   return (
-    <main className={styles.main}>
+    <ConfigProvider theme={theme} className={styles.main}>
       <Layout style={{
         margin: '2rem 2rem',
         padding: '0 24',
@@ -40,6 +42,6 @@ export default function Home() {
       </Layout>
 
 
-    </main>
+    </ConfigProvider>
   )
 }

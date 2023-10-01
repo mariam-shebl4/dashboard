@@ -39,13 +39,16 @@ const Navbar = () => {
             style={{
               fontSize: '16px',
               width: '29px',
-              height: '37px',
+              height: '27px',
               position: 'absolute',
               left: collapsed ? "4.1rem" : "11.5rem",
-              top: '.5rem',
+              top: '.9rem',
               borderRadius: '5rem',
               backgroundColor: "#fff",
-              zIndex: 4
+              zIndex: 4,
+              display:"flex",
+              alignItems:'center',
+              justifyContent:'center'
             }}
             theme="light"
           />
