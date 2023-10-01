@@ -11,13 +11,9 @@ const theme = {
     colorLinkActive: '#fff',
     colorPrimaryText: '#fff',
     colorLink: '#222',
-    colorBgElevated: '#222',
-    colorTextSecondary: 'red', // Updated to white (#fff)
+    colorBgElevated: '#fff',
     colorPrimaryBg: '#222',
-    colorPrimaryTextHover: 'red',
     colorPrimaryTextActive: '#fff',
-    colorPrimaryActive:'red',
-    colorPrimaryBgHover:'red',
     colorTextLightSolid:'#fff'
     
   },
